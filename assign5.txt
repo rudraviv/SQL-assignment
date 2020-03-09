@@ -1,0 +1,585 @@
+
+			USE HR
+
+1. Display employees where the first name or last name starts
+with S.
+
+mysql> select FIRST_NAME,LAST_NAME from employees where FIRST_NAME like "s%" or LAST_NAME like "s%";
++------------+-----------+
+| FIRST_NAME | LAST_NAME |
++------------+-----------+
+| Sundar     | Ande      |
+| Shelli     | Baida     |
+| Sarah      | Bell      |
+| Shelley    | Higgins   |
+| Steven     | King      |
+| Sundita    | Kumar     |
+| Steven     | Markle    |
+| Susan      | Mavris    |
+| Samuel     | McCain    |
+| Nandita    | Sarchand  |
+| Ismael     | Sciarra   |
+| John       | Seo       |
+| Sarath     | Sewall    |
+| Lindsey    | Smith     |
+| William    | Smith     |
+| Stephen    | Stiles    |
+| Martha     | Sullivan  |
+| Patrick    | Sully     |
+| Sigal      | Tobias    |
+| Shanta     | Vollman   |
++------------+-----------+
+20 rows in set (0.01 sec)
+
+
+2. Display first name and last name after converting the first letter
+of each name to upper case and the rest to lower case.
+
+mysql> select concat(upper(left(FIRST_NAME,1)),substring(FIRST_NAME,2,length(FIRST_NAME)))"FIRST NAME",concat(upper(left(LAST_NAME,1)),substring(LAST_NAME,2,length(LAST_NAME)))"LAST NAME" from employees limit 5;
+
+
++------------+-----------+
+| FIRST NAME | LAST NAME |
++------------+-----------+
+| Ellen      | Abel      |
+| Sundar     | Ande      |
+| Mozhe      | Atkinson  |
+| David      | Austin    |
+| Hermann    | Baer      |
++------------+-----------+
+5 rows in set (0.00 sec)
+
+
+
+
+3. Display the first word in job title.
+
+
+mysql> select left(JOB_TITLE,1)"FIRST LETTER"from jobs limit 5;
++--------------+
+| FIRST LETTER |
++--------------+
+| P            |
+| A            |
+| A            |
+| F            |
+| A            |
++--------------+
+5 rows in set (0.00 sec)
+
+
+4. Display the length of first name for employees where last name
+contain character ‘b’ after 3rd position.
+
+
+
+5. Display first name in upper case and email address in lower
+case for employees where the first name and email address are
+same irrespective of the case.
+
+mysql> select upper(FIRST_NAME),lower(EMAIL) from employees where upper(FIRST_NAME)=EMAIL;
+Empty set (0.00 sec)
+
+
+6. Display first name, salary, and round the salary to thousands.
+
+mysql> SELECT FIRST_NAME,ROUND(SALARY,-3) FROM employees LIMIT 10;              +------------+------------------+
+| FIRST_NAME | ROUND(SALARY,-3) |
++------------+------------------+
+| Steven     |            24000 |
+| Neena      |            17000 |
+| Lex        |            17000 |
+| Alexander  |             9000 |
+| Bruce      |             6000 |
+| David      |             5000 |
+| Valli      |             5000 |
+| Diana      |             4000 |
+| Nancy      |            12000 |
+| Daniel     |             9000 |
++------------+------------------+
+10 rows in set (0.00 sec)
+
+7. Display manager ID and number of employees managed by the
+manager.
+mysql> SELECT MANAGER_ID,COUNT(EMPLOYEE_ID)FROM employees WHERE MANAGER_ID!=0 GROUP BY MANAGER_ID LIMIT 10;
++------------+--------------------+
+| MANAGER_ID | COUNT(EMPLOYEE_ID) |
++------------+--------------------+
+|        100 |                 14 |
+|        101 |                  5 |
+|        102 |                  1 |
+|        103 |                  4 |
+|        108 |                  5 |
+|        114 |                  5 |
+|        120 |                  8 |
+|        121 |                  8 |
+|        122 |                  8 |
+|        123 |                  8 |
++------------+--------------------+
+10 rows in set (0.00 sec)
+
+8. Display employee ID and the date on which he ended his
+previous job.
+ 
+ mysql> SELECT EMPLOYEE_ID ,END_DATE FROM job_history ;
++-------------+------------+
+| EMPLOYEE_ID | END_DATE   |
++-------------+------------+
+|         102 | 1998-07-24 |
+|         101 | 1993-10-27 |
+|         101 | 1997-03-15 |
+|         201 | 1999-12-19 |
+|         114 | 1999-12-31 |
+|         122 | 1999-12-31 |
+|         200 | 1993-06-17 |
+|         176 | 1998-12-31 |
+|         176 | 1999-12-31 |
+|         200 | 1998-12-31 |
+|           0 | 0000-00-00 |
++-------------+------------+
+11 rows in set (0.00 sec)
+
+9. Display the country ID and number of cities we have in the
+country.
+mysql> SELECT COUNTRY_ID,COUNT(CITY)FROM locations GROUP BY COUNTRY_ID;
++------------+-------------+
+| COUNTRY_ID | COUNT(CITY) |
++------------+-------------+
+| "          |           1 |
+| AU         |           1 |
+| BR         |           1 |
+| CA         |           2 |
+| CH         |           2 |
+| CN         |           1 |
+| DE         |           1 |
+| IN         |           1 |
+| IT         |           2 |
+| JP         |           2 |
+| NL         |           1 |
+| Ox         |           1 |
+| SG         |           1 |
+| UK         |           2 |
+| US         |           4 |
++------------+-------------+
+15 rows in set (0.01 sec)
+
+10. Display average salary of employees in each department who
+have commission percentage.
+
+mysql> SELECT AVG(SALARY),DEPARTMENT_ID FROM employees WHERE COMMISSION_PCT>0 GROUP BY DEPARTMENT_ID;
++-------------+---------------+
+| AVG(SALARY) | DEPARTMENT_ID |
++-------------+---------------+
+| 7000.000000 |             0 |
+| 8955.882353 |            80 |
++-------------+---------------+
+2 rows in set (0.00 sec)
+
+11. Display job ID, number of employees, sum of salary, and
+difference between highest salary and lowest salary of the
+employees of the job.
+
+mysql> SELECT JOB_ID,COUNT(EMPLOYEE_ID),SUM(SALARY),MAX(SALARY)-MIN(SALARY)"DIFFERENCE" FROM employees GROUP BY JOB_ID;
++------------+--------------------+-------------+------------+
+| JOB_ID     | COUNT(EMPLOYEE_ID) | SUM(SALARY) | DIFFERENCE |
++------------+--------------------+-------------+------------+
+| AC_ACCOUNT |                  1 |     8300.00 |       0.00 |
+| AC_MGR     |                  1 |    12000.00 |       0.00 |
+| AD_ASST    |                  1 |     4400.00 |       0.00 |
+| AD_PRES    |                  1 |    24000.00 |       0.00 |
+| AD_VP      |                  2 |    34000.00 |       0.00 |
+| FI_ACCOUNT |                  5 |    39600.00 |    2100.00 |
+| FI_MGR     |                  1 |    12000.00 |       0.00 |
+| HR_REP     |                  1 |     6500.00 |       0.00 |
+| IT_PROG    |                  5 |    28800.00 |    4800.00 |
+| MK_MAN     |                  1 |    13000.00 |       0.00 |
+| MK_REP     |                  1 |     6000.00 |       0.00 |
+| PR_REP     |                  1 |    10000.00 |       0.00 |
+| PU_CLERK   |                  5 |    13900.00 |     600.00 |
+| PU_MAN     |                  1 |    11000.00 |       0.00 |
+| SA_MAN     |                  5 |    61000.00 |    3500.00 |
+| SA_REP     |                 30 |   250500.00 |    5400.00 |
+| SH_CLERK   |                 20 |    64300.00 |    1700.00 |
+| ST_CLERK   |                 20 |    55700.00 |    1500.00 |
+| ST_MAN     |                  5 |    36400.00 |    2400.00 |
++------------+--------------------+-------------+------------+
+19 rows in set (0.00 sec)
+
+
+12. Display job ID for jobs with average salary more than 10000.
+
+Smysql> SELECT JOB_ID,AVG(SALARY) FROM employees GROUP BY JOB_ID HAVING AVG(SALARY)>10000;
++---------+--------------+
+| JOB_ID  | AVG(SALARY)  |
++---------+--------------+
+| AC_MGR  | 12000.000000 |
+| AD_PRES | 24000.000000 |
+| AD_VP   | 17000.000000 |
+| FI_MGR  | 12000.000000 |
+| MK_MAN  | 13000.000000 |
+| PU_MAN  | 11000.000000 |
+| SA_MAN  | 12200.000000 |
++---------+--------------+
+7 rows in set (0.00 sec)
+
+13. Display years in which more than 10 employees joined.
+
+
+mysql> SELECT YEAR(HIRE_DATE),COUNT(EMPLOYEE_ID) FROM employees GROUP BY YEAR(HIRE_DATE)HAVING COUNT(EMPLOYEE_ID)>10;
++-----------------+--------------------+
+| YEAR(HIRE_DATE) | COUNT(EMPLOYEE_ID) |
++-----------------+--------------------+
+|            1987 |                107 |
++-----------------+--------------------+
+1 row in set (0.00 sec)
+
+14. Display departments in which more than five employees have
+commission percentage.
+
+mysql> SELECT DEPARTMENT_ID,COUNT(EMPLOYEE_ID)FROM employees WHERE COMMISSION_PCT>0 GROUP BY DEPARTMENT_ID;
++---------------+--------------------+
+| DEPARTMENT_ID | COUNT(EMPLOYEE_ID) |
++---------------+--------------------+
+|             0 |                  1 |
+|            80 |                 34 |
++---------------+------------
+
+
+15. Display employee ID for employees who did more than one job
+in the past.
+
+mysql> SELECT EMPLOYEE_ID FROM job_history GROUP BY EMPLOYEE_ID HAVING COUNT(EMPLOYEE_ID)>1;
++-------------+
+| EMPLOYEE_ID |
++-------------+
+|         101 |
+|         176 |
+|         200 |
++-------------+
+3 rows in set (0.00 sec)
+
+16. Display job ID of jobs that were done by more than 3
+employees for more than 100 days.
+
+
+
+17. Display department ID, year, and Number of employees
+joined.
+
+mysql> SELECT DEPARTMENT_ID,YEAR(HIRE_DATE),COUNT(EMPLOYEE_ID) FROM employees GROUP BY DEPARTMENT_ID,YEAR(HIRE_DATE);
++---------------+-----------------+--------------------+
+| DEPARTMENT_ID | YEAR(HIRE_DATE) | COUNT(EMPLOYEE_ID) |
++---------------+-----------------+--------------------+
+|            90 |            1987 |                  3 |
+|            60 |            1987 |                  5 |
+|           100 |            1987 |                  6 |
+|            30 |            1987 |                  6 |
+|            50 |            1987 |                 45 |
+|            80 |            1987 |                 34 |
+|             0 |            1987 |                  1 |
+|            10 |            1987 |                  1 |
+|            20 |            1987 |                  2 |
+|            40 |            1987 |                  1 |
+|            70 |            1987 |                  1 |
+|           110 |            1987 |                  2 |
++---------------+-----------------+--------------------+
+12 rows in set (0.00 sec)
+
+
+18. Display departments where any manager is managing more
+than 5 employees.
+
+mysql> SELECT DEPARTMENT_ID,MANAGER_ID,COUNT(EMPLOYEE_ID) FROM employees GROUP BY DEPARTMENT_ID,MANAGER_ID HAVING COUNT(EMPLOYEE_ID)>5;
++---------------+------------+--------------------+
+| DEPARTMENT_ID | MANAGER_ID | COUNT(EMPLOYEE_ID) |
++---------------+------------+--------------------+
+|            50 |        120 |                  8 |
+|            50 |        121 |                  8 |
+|            50 |        122 |                  8 |
+|            50 |        123 |                  8 |
+|            50 |        124 |                  8 |
+|            80 |        145 |                  6 |
+|            80 |        146 |                  6 |
+|            80 |        147 |                  6 |
+|            80 |        148 |                  6 |
++---------------+------------+--------------------+
+9 rows in set (0.00 sec)
+
+
+
+
+19. Display first name and date of first salary of the employees.
+mysql> SELECT FIRST_NAME,HIRE_DATE,LAST_DAY(HIRE_DATE)"SALARY DAY"FROM employees LIMIT 10;
++------------+------------+------------+
+| FIRST_NAME | HIRE_DATE  | SALARY DAY |
++------------+------------+------------+
+| Steven     | 1987-06-17 | 1987-06-30 |
+| Neena      | 1987-06-18 | 1987-06-30 |
+| Lex        | 1987-06-19 | 1987-06-30 |
+| Alexander  | 1987-06-20 | 1987-06-30 |
+| Bruce      | 1987-06-21 | 1987-06-30 |
+| David      | 1987-06-22 | 1987-06-30 |
+| Valli      | 1987-06-23 | 1987-06-30 |
+| Diana      | 1987-06-24 | 1987-06-30 |
+| Nancy      | 1987-06-25 | 1987-06-30 |
+| Daniel     | 1987-06-26 | 1987-06-30 |
++------------+------------+------------+
+10 rows in set (0.00 sec)
+
+20. Display first name and experience of the employees.
+
+mysql> SELECT FIRST_NAME ,DATEDIFF(SYSDATE(),HIRE_DATE)/365"Experience" FROM employees LIMIT 10;
++------------+------------+
+| FIRST_NAME | Experience |
++------------+------------+
+| Steven     |    32.7233 |
+| Neena      |    32.7205 |
+| Lex        |    32.7178 |
+| Alexander  |    32.7151 |
+| Bruce      |    32.7123 |
+| David      |    32.7096 |
+| Valli      |    32.7068 |
+| Diana      |    32.7041 |
+| Nancy      |    32.7014 |
+| Daniel     |    32.6986 |
++------------+------------+
+10 rows in set (0.00 sec)
+
+21. Display first name of employees who joined in 2001.
+22. Display employees who joined in the current year.
+
+23. Display the number of days between system date and 1st
+January 2011.
+mysql> SELECT DATEDIFF(SYSDATE(),'2011-01-01')/365;
+
+24. Display how many employees joined in each month of the
+current year.
+
+
+
+25. Display number of employees joined after 15th of the month.
+
+mysql> SELECT COUNT(EMPLOYEE_ID)FROM employees WHERE DAY(HIRE_DATE)>15 ; 
++--------------------+
+| COUNT(EMPLOYEE_ID) |
++--------------------+
+|                 61 |
++--------------------+
+1 row in set (0.00 sec)
+
+
+26. Display details of departments in which the maximum salary
+is more than 10000.
+
+
+mysql> SELECT * FROM departments WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM employees GROUP BY DEPARTMENT_ID HAVING MAX(SALARY)>10000);
++---------------+-----------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME | MANAGER_ID | LOCATION_ID |
++---------------+-----------------+------------+-------------+
+|            20 | Marketing       |        201 |        1800 |
+|            30 | Purchasing      |        114 |        1700 |
+|            80 | Sales           |        145 |        2500 |
+|            90 | Executive       |        100 |        1700 |
+|           100 | Finance         |        108 |        1700 |
+|           110 | Accounting      |        205 |        1700 |
++---------------+-----------------+------------+-------------+
+6 rows in set (0.02 sec)
+
+27. Display details of departments managed by ‘Smith’.
+
+mysql>  SELECT * FROM departments WHERE MANAGER_ID IN (SELECT MANAGER_ID FROM employees WHERE LAST_NAME="Smith");
+Empty set (0.00 sec)
+
+
+28. Display jobs into which employees joined in the current year.
+
+29. Display employees who did not do any job in the past.
+SELECT * FROM employees WHERE EMPLOYEE_ID NOT IN(SELECT EMPLOYEE_ID FROM job_history);
+
+
+30. Display job title and average salary for employees who did a
+job in the past.
+
+SELECT JOB_TITLE,AVG(SALARY)FROM jobs cross join employees GOUP BY JOB_TITLE WHERE EMPLOYEE_ID IN(SELECT EMPlOYEE_ID FROM job_history);
+
+31. Display details of manager who manages more than 5
+employees.
+
+SELECT * FROM employees WHERE MANAGER_ID IN (SELECT MANAGER_ID FROM employees GROUP BY MANAGER_ID HAVING COUNT(EMPLOYEE_ID)>5);
+
+32. Display the departments into which no employee joined in last
+two years.
+
+SELECT  * FROM departments
+WHERE DEPARTMENT_ID NOT IN 
+( SELECT DEPARTMENT_ID FROM employees WHERE FLOOR((SYSDATE-HIRE_DATE)/365) < 2) ;
+
+33. Display the details of departments in which the max salary is
+greater than 10000 for employees who did a job in the past.
+
+mysql> SELECT * FROM departments WHERE DEPARTMENT_ID IN(SELECT DEPARTMENT_ID FROM employees WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM job_history)GROUP BY DEPARTMENT_ID HAVING MAX(SALARY)>10000);
++---------------+-----------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME | MANAGER_ID | LOCATION_ID |
++---------------+-----------------+------------+-------------+
+|            20 | Marketing       |        201 |        1800 |
+|            30 | Purchasing      |        114 |        1700 |
+|            90 | Executive       |        100 |        1700 |
++---------------+-----------------+------------+-------------+
+3 rows in set (0.00 sec)
+
+
+34. Display details of current job for employees who worked as IT
+Programmers in the past.
+
+mysql> SELECT * FROM jobs WHERE JOB_ID IN(SELECT JOB_ID FROM employees WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM job_history WHERE JOB_ID="IT_PROG"));
++--------+-------------------------------+------------+------------+
+| JOB_ID | JOB_TITLE                     | MIN_SALARY | MAX_SALARY |
++--------+-------------------------------+------------+------------+
+| AD_VP  | Administration Vice President |      15000 |      30000 |
++--------+-------------------------------+------------+------------+
+1 row in set (0.00 sec)
+
+35. Display third highest salary of all employees
+
+mysql> SELECT DISTINCT SALARY FROM employees ORDER BY SALARY DESC LIMIT 2,1;
++----------+
+| SALARY   |
++----------+
+| 14000.00 |
++----------+
+1 row in set (0.01 sec)
+
+36. Display details of the employees where commission
+percentage is null and salary in the range 5000 to 10000 and
+department is 30.
+
+SELECT * FROM employees WHERE COMMISSION_PCT IS NULL AND SALARY BETWEEN 5000 AND 10000 AND DEPARTMENT_ID=30;
+
+
+			USE SALES
+
+1. Write two different queries that would produce all orders taken
+on October 3 rd or 4 th , 1990.
+
+mysql> SELECT * FROM ORDERS WHERE odate="1990-10-03" OR odate="1990-10-04";
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-04 | 2006 | 1001 |
+| 3010 |  309.95 | 1990-10-04 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-04 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+2. Write a query that selects all of the customers serviced by Peel
+or Motika. (Hint:the snum field relates the two tables to one
+another).
+
+mysql> SELECT * FROM CUSTOMERS WHERE snum IN(SELECT snum FROM SALESPEOPLE WHERE sname="Peel" OR  sname="Motika");
++------+---------+--------+--------+------+
+| cnum | cname   | city   | rating | snum |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
++------+---------+--------+--------+------+
+3 rows in set (0.00 sec)
+
+
+3. Write a query that will produce all the customers whose names
+begin with a letter from ‘A’ to ‘G’.
+
+mysql> SELECT * FROM CUSTOMERS WHERE cname BETWEEN 'A' and 'G';
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.01 sec)
+
+4. Write a query that selects all customers whose names begin
+with the letter ‘C’.
+
+mysql> SELECT * FROM CUSTOMERS WHERE cname LIKE "C%";
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+5. Write a query that selects all orders except those with zeroes or
+NULLs in the amt field.
+
+
+
+6. Write a query that counts all orders for October 3.
+
+mysql> SELECT COUNT(onum)"COUNT",odate"ORDER DATE" FROM ORDERS WHERE odate="1990-10-03" ;
++-------+------------+
+| COUNT | ORDER DATE |
++-------+------------+
+|     5 | 1990-10-03 |
++-------+------------+
+1 row in set (0.00 sec)
+
+7. Write a query that counts the number of different non-NULL city
+values in the Customers table.
+
+mysql> SELECT COUNT(city)"COUNT",CITY FROM CUSTOMERS GROUP BY city;
++-------+----------+
+| COUNT | CITY     |
++-------+----------+
+|     2 | London   |
+|     2 | Rome     |
+|     2 | San Jose |
+|     1 | Berlin   |
++-------+----------+
+4 rows in set (0.00 sec)
+
+
+8. Write a query that selects each customer’s smallest order
+
+9. Write a query that selects the first customer, in alphabetical
+order, whose name begins with G.
+
+10. Write a query that selects the highest rating in each city.
+mysql> SELECT MAX(rating),city FROM CUSTOMERS GROUP BY city; 
++-------------+----------+
+| MAX(rating) | city     |
++-------------+----------+
+|         100 | London   |
+|         200 | Rome     |
+|         300 | San Jose |
+|         300 | Berlin   |
++-------------+----------+
+4 rows in set (0.00 sec)
+
+
+
+11. Write a query that counts the number of salespeople
+registering orders for eachday. (If a salesperson has more than
+one order on a given day, he or she should be
+counted only once.)
+
+mysql> SELECT COUNT(snum)FROM SALESPEOPLE WHERE snum IN (SELECT DISTINCT snum FROM ORDERS);
++-------------+
+| COUNT(snum) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+
+
+

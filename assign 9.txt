@@ -1,0 +1,20 @@
+> db;
+classwork
+> use CDAC;
+switched to db CDAC
+> db.collections();
+> db.createCollection('LIBRARY');
+{ "ok" : 1 }
+> db.LIBRARY.insert({name:"MongoDb programming",author:'DAC',likes:100});
+WriteResult({ "nInserted" : 1 })
+> db.LIBRARY.find({});
+{ "_id" : ObjectId("5e5bdd0d5e471015f07fca79"), "name" : "MongoDb programming", "author" : "DAC", "likes" : 100 }
+
+> db.LIBRARY.find({}).pretty();
+{
+	"_id" : ObjectId("5e5bdd0d5e471015f07fca79"),
+	"name" : "MongoDb programming",
+	"author" : "DAC",
+	"likes" : 100
+}
+

@@ -1,0 +1,877 @@
+1. Write a query to display the first _ name , last _ name using
+alias name “ First Name ", " Last Name ".
+
+mysql> select first_name "FIRST NAME",last_name "LAST NAME" from employees limit 10;
++------------+-----------+
+| FIRST NAME | LAST NAME |
++------------+-----------+
+| Ellen      | Abel      |
+| Sundar     | Ande      |
+| Mozhe      | Atkinson  |
+| David      | Austin    |
+| Hermann    | Baer      |
+| Shelli     | Baida     |
+| Amit       | Banda     |
+| Elizabeth  | Bates     |
+| Sarah      | Bell      |
+| David      | Bernstein |
++------------+-----------+
+10 rows in set (0.00 sec)
+
+
+2. Write a query to get unique department ID from employee
+table .
+
+mysql> select distinct department_id from employees;
++---------------+
+| department_id |
++---------------+
+|             0 |
+|            10 |
+|            20 |
+|            30 |
+|            40 |
+|            50 |
+|            60 |
+|            70 |
+|            80 |
+|            90 |
+|           100 |
+|           110 |
++---------------+
+12 rows in set (0.01 sec)
+
+
+3. Write a query to get all employee details from the employee
+table order by first name , descending .
+
+
+mysql> select * from employees order by first_name desc limit 10;
++-------------+------------+-----------+----------+--------------------+------------+------------+---------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL    | PHONE_NUMBER       | HIRE_DATE  | JOB_ID     | SALARY  | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+----------+--------------------+------------+------------+---------+----------------+------------+---------------+
+|         180 | Winston    | Taylor    | WTAYLOR  | 650.507.9876       | 1987-09-05 | SH_CLERK   | 3200.00 |           0.00 |        120 |            50 |
+|         171 | William    | Smith     | WSMITH   | 011.44.1343.629268 | 1987-08-27 | SA_REP     | 7400.00 |           0.15 |        148 |            80 |
+|         206 | William    | Gietz     | WGIETZ   | 515.123.8181       | 1987-10-01 | AC_ACCOUNT | 8300.00 |           0.00 |        205 |           110 |
+|         195 | Vance      | Jones     | VJONES   | 650.501.4876       | 1987-09-20 | SH_CLERK   | 2800.00 |           0.00 |        123 |            50 |
+|         106 | Valli      | Pataballa | VPATABAL | 590.423.4560       | 1987-06-23 | IT_PROG    | 4800.00 |           0.00 |        103 |            60 |
+|         141 | Trenna     | Rajs      | TRAJS    | 650.121.8009       | 1987-07-28 | ST_CLERK   | 3500.00 |           0.00 |        124 |            50 |
+|         132 | TJ         | Olson     | TJOLSON  | 650.124.8234       | 1987-07-19 | ST_CLERK   | 2100.00 |           0.00 |        121 |            50 |
+|         190 | Timothy    | Gates     | TGATES   | 650.505.3876       | 1987-09-15 | SH_CLERK   | 2900.00 |           0.00 |        122 |            50 |
+|         170 | Tayler     | Fox       | TFOX     | 011.44.1343.729268 | 1987-08-26 | SA_REP     | 9600.00 |           0.20 |        148 |            80 |
+|         203 | Susan      | Mavris    | SMAVRIS  | 515.123.7777       | 1987-09-28 | HR_REP     | 6500.00 |           0.00 |        101 |            40 |
++-------------+------------+-----------+----------+--------------------+------------+------------+---------+----------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+
+4. Write a query to get the names ( first _ name , last _ name ),
+salary , PF of all the employees ( PF is calculated as 15% of
+salary ).
+
+
+mysql> select employee_id,first_name,last_name,salary,salary*15/100"PF" from employees limit 10;
++-------------+------------+-----------+----------+-------------+
+| employee_id | first_name | last_name | salary   | PF          |
++-------------+------------+-----------+----------+-------------+
+|         100 | Steven     | King      | 24000.00 | 3600.000000 |
+|         101 | Neena      | Kochhar   | 17000.00 | 2550.000000 |
+|         102 | Lex        | De Haan   | 17000.00 | 2550.000000 |
+|         103 | Alexander  | Hunold    |  9000.00 | 1350.000000 |
+|         104 | Bruce      | Ernst     |  6000.00 |  900.000000 |
+|         105 | David      | Austin    |  4800.00 |  720.000000 |
+|         106 | Valli      | Pataballa |  4800.00 |  720.000000 |
+|         107 | Diana      | Lorentz   |  4200.00 |  630.000000 |
+|         108 | Nancy      | Greenberg | 12000.00 | 1800.000000 |
+|         109 | Daniel     | Faviet    |  9000.00 | 1350.000000 |
++-------------+------------+-----------+----------+-------------+
+10 rows in set (0.00 sec)
+
+5. Write a query to get the employee ID , names ( first _ name ,
+last _ name ), salary in ascending order of salary .
+
+mysql> select employee_id,first_name,last_name,salary from employees order by salary asc limit 10;
++-------------+------------+------------+---------+
+| employee_id | first_name | last_name  | salary  |
++-------------+------------+------------+---------+
+|         132 | TJ         | Olson      | 2100.00 |
+|         136 | Hazel      | Philtanker | 2200.00 |
+|         128 | Steven     | Markle     | 2200.00 |
+|         127 | James      | Landry     | 2400.00 |
+|         135 | Ki         | Gee        | 2400.00 |
+|         119 | Karen      | Colmenares | 2500.00 |
+|         144 | Peter      | Vargas     | 2500.00 |
+|         131 | James      | Marlow     | 2500.00 |
+|         140 | Joshua     | Patel      | 2500.00 |
+|         182 | Martha     | Sullivan   | 2500.00 |
++-------------+------------+------------+---------+
+10 rows in set (0.00 sec)
+
+
+mysql> select sum(salary) from employees;
++-------------+
+| sum(salary) |
++-------------+
+|   691400.00 |
++-------------+
+1 row in set (0.02 sec)
+
+
+mysql> select max(salary) "MAXIMUM SALARY",min(salary)"MINIMUM SALARY" from employees;
++----------------+----------------+
+| MAXIMUM SALARY | MINIMUM SALARY |
++----------------+----------------+
+|       24000.00 |        2100.00 |
++----------------+----------------+
+1 row in set (0.00 sec)
+
+
+8. Write a query to calculate 171*214+625.
+
+mysql> select 171*214+625 from dual;
++-------------+
+| 171*214+625 |
++-------------+
+|       37219 |
++-------------+
+1 row in set (0.00 sec)
+
+9. Write a query to get the names ( for example Ellen Abel ,
+Sundar Ande etc .) of all the employees from employees table .
+
+
+mysql> select first_name,last_name from employees limit 10;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Ellen      | Abel      |
+| Sundar     | Ande      |
+| Mozhe      | Atkinson  |
+| David      | Austin    |
+| Hermann    | Baer      |
+| Shelli     | Baida     |
+| Amit       | Banda     |
+| Elizabeth  | Bates     |
+| Sarah      | Bell      |
+| David      | Bernstein |
++------------+-----------+
+10 rows in set (0.00 sec)
+
+
+10. Write a query to select first 10 records from a employees
+table .
+
+mysql> select * from employees limit 10;
++-------------+------------+-----------+----------+--------------+------------+------------+----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL    | PHONE_NUMBER | HIRE_DATE  | JOB_ID     | SALARY   | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+----------+--------------+------------+------------+----------+----------------+------------+---------------+
+|         100 | Steven     | King      | SKING    | 515.123.4567 | 1987-06-17 | AD_PRES    | 24000.00 |           0.00 |          0 |            90 |
+|         101 | Neena      | Kochhar   | NKOCHHAR | 515.123.4568 | 1987-06-18 | AD_VP      | 17000.00 |           0.00 |        100 |            90 |
+|         102 | Lex        | De Haan   | LDEHAAN  | 515.123.4569 | 1987-06-19 | AD_VP      | 17000.00 |           0.00 |        100 |            90 |
+|         103 | Alexander  | Hunold    | AHUNOLD  | 590.423.4567 | 1987-06-20 | IT_PROG    |  9000.00 |           0.00 |        102 |            60 |
+|         104 | Bruce      | Ernst     | BERNST   | 590.423.4568 | 1987-06-21 | IT_PROG    |  6000.00 |           0.00 |        103 |            60 |
+|         105 | David      | Austin    | DAUSTIN  | 590.423.4569 | 1987-06-22 | IT_PROG    |  4800.00 |           0.00 |        103 |            60 |
+|         106 | Valli      | Pataballa | VPATABAL | 590.423.4560 | 1987-06-23 | IT_PROG    |  4800.00 |           0.00 |        103 |            60 |
+|         107 | Diana      | Lorentz   | DLORENTZ | 590.423.5567 | 1987-06-24 | IT_PROG    |  4200.00 |           0.00 |        103 |            60 |
+|         108 | Nancy      | Greenberg | NGREENBE | 515.124.4569 | 1987-06-25 | FI_MGR     | 12000.00 |           0.00 |        101 |           100 |
+|         109 | Daniel     | Faviet    | DFAVIET  | 515.124.4169 | 1987-06-26 | FI_ACCOUNT |  9000.00 |           0.00 |        108 |           100 |
++-------------+------------+-----------+----------+--------------+------------+------------+----------+----------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+
+
+11. Display first name and join date of the employees who is
+either IT Programmer or Sales Man .
+
+mysql> select first_name,hire_date from employees where job_id="IT_PROG" or job_id="Sa_man";
++------------+------------+
+| first_name | hire_date  |
++------------+------------+
+| Alexander  | 1987-06-20 |
+| Bruce      | 1987-06-21 |
+| David      | 1987-06-22 |
+| Valli      | 1987-06-23 |
+| Diana      | 1987-06-24 |
+| John       | 1987-08-01 |
+| Karen      | 1987-08-02 |
+| Alberto    | 1987-08-03 |
+| Gerald     | 1987-08-04 |
+| Eleni      | 1987-08-05 |
++------------+------------+
+10 rows in set (0.00 sec)
+
+
+12. Display details of employee with ID 150 or 160.
+mysql> select * from employees where employee_id=150 or employee_id=160;
++-------------+------------+-----------+---------+--------------------+------------+--------+----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL   | PHONE_NUMBER       | HIRE_DATE  | JOB_ID | SALARY   | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+---------+--------------------+------------+--------+----------+----------------+------------+---------------+
+|         150 | Peter      | Tucker    | PTUCKER | 011.44.1344.129268 | 1987-08-06 | SA_REP | 10000.00 |           0.30 |        145 |            80 |
+|         160 | Louise     | Doran     | LDORAN  | 011.44.1345.629268 | 1987-08-16 | SA_REP |  7500.00 |           0.30 |        146 |            80 |
++-------------+------------+-----------+---------+--------------------+------------+--------+----------+----------------+------------+---------------+
+2 rows in set (0.00 sec)
+
+
+mysql> select FIRST_NAME,salary,commission_pct,hire_date from employees where salary <10000 limit 10;
++-------------+---------+----------------+------------+
+| FIRST_NAME  | salary  | commission_pct | hire_date  |
++-------------+---------+----------------+------------+
+| Alexander   | 9000.00 |           0.00 | 1987-06-20 |
+| Bruce       | 6000.00 |           0.00 | 1987-06-21 |
+| David       | 4800.00 |           0.00 | 1987-06-22 |
+| Valli       | 4800.00 |           0.00 | 1987-06-23 |
+| Diana       | 4200.00 |           0.00 | 1987-06-24 |
+| Daniel      | 9000.00 |           0.00 | 1987-06-26 |
+| John        | 8200.00 |           0.00 | 1987-06-27 |
+| Ismael      | 7700.00 |           0.00 | 1987-06-28 |
+| Jose Manuel | 7800.00 |           0.00 | 1987-06-29 |
+| Luis        | 6900.00 |           0.00 | 1987-06-30 |
++-------------+---------+----------------+
+------------+
+10 rows in set (0.00 sec)
+
+
+
+14. Display employees where the first name or last name starts
+with S
+mysql>  select FIRST_NAME from employees where FIRST_NAME like "s%" or LAST_NAME like "s%";
++------------+
+| FIRST_NAME |
++------------+
+| Sundar     |
+| Shelli     |
+| Sarah      |
+| Shelley    |
+| Steven     |
+| Sundita    |
+| Steven     |
+| Susan      |
+| Samuel     |
+| Nandita    |
+| Ismael     |
+| John       |
+| Sarath     |
+| Lindsey    |
+| William    |
+| Stephen    |
+| Martha     |
+| Patrick    |
+| Sigal      |
+| Shanta     |
++------------+
+20 rows in set (0.00 sec)
+
++------------+
+
+mysql> select JOB_TITLE from jobs order by job_title desc ;
++---------------------------------+
+| JOB_TITLE                       |
++---------------------------------+
+| Stock Manager                   |
+| Stock Clerk                     |
+| Shipping Clerk                  |
+| Sales Representative            |
+| Sales Manager                   |
+| Purchasing Manager              |
+| Purchasing Clerk                |
+| Public Relations Representative |
+| Public Accountant               |
+| Programmer                      |
+| President                       |
+| Marketing Representative        |
+| Marketing Manager               |
+| Human Resources Representative  |
+| Finance Manager                 |
+| Administration Vice President   |
+| Administration Assistant        |
+| Accounting Manager              |
+| Accountant                      |
++---------------------------------+
+19 rows in set (0.00 sec)
+
+
+mysql> select * from employees where commission_pct is null and salary between 500 and 10000 and department_id=30;
+Empty set (0.01 sec)
+
+
+17. Display employees first _ name , email who are working in
+“ Executive ” department .
+
+ mysql> first_name,email from employees where DEPARTMENT_ID=90;
++------------+----------+
+| first_name | email    |
++------------+----------+
+| Steven     | SKING    |
+| Neena      | NKOCHHAR |
+| Lex        | LDEHAAN  |
++------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select distinct country_id from locations;
++------------+
+| country_id |
++------------+
+| "          |
+| AU         |
+| BR         |
+| CA         |
+| CH         |
+| CN         |
+| DE         |
+| IN         |
+| IT         |
+| JP         |
+| NL         |
+| Ox         |
+| SG         |
+| UK         |
+| US         |
++------------+
+15 rows in set (0.00 sec)
+
+
+mysql> select * from employees where job_id="IT_PROG" and job_id="FI_ACCOUNT";
+Empty set (0.00 sec)
+
+
+
+20. Display all countries in ascending order .
+mysql> select * from countries order by country_name asc;
++------------+--------------------------+-----------+
+| COUNTRY_ID | COUNTRY_NAME             | REGION_ID |
++------------+--------------------------+-----------+
+| AR         | Argentina                |         2 |
+| AU         | Australia                |         3 |
+| BE         | Belgium                  |         1 |
+| BR         | Brazil                   |         2 |
+| CA         | Canada                   |         2 |
+| CN         | China                    |         3 |
+| DK         | Denmark                  |         1 |
+| EG         | Egypt                    |         4 |
+| FR         | France                   |         1 |
+| DE         | Germany                  |         1 |
+| HK         | HongKong                 |         3 |
+| IN         | India                    |         3 |
+| IL         | Israel                   |         4 |
+| IT         | Italy                    |         1 |
+| JP         | Japan                    |         3 |
+| KW         | Kuwait                   |         4 |
+| MX         | Mexico                   |         2 |
+| NL         | Netherlands              |         1 |
+| NG         | Nigeria                  |         4 |
+| SG         | Singapore                |         3 |
+| CH         | Switzerland              |         1 |
+| UK         | United Kingdom           |         1 |
+| US         | United States of America |         2 |
+| ZM         | Zambia                   |         4 |
+| ZW         | Zimbabwe                 |         4 |
++------------+--------------------------+-----------+
+
+
+
+
+mysql> select * from S;
++----+-------+--------+--------+
+| S# | Sname | Status | City   |
++----+-------+--------+--------+
+| S1 | Smith |     20 | London |
+| S2 | Jones |     10 | Paris  |
+| S3 | Blake |     30 | Paris  |
+| S4 | Clark |     20 | London |
+| S5 | Adams |     30 | Athens |
++----+-------+--------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> select `s#`,Sname from S;
++----+-------+
+| s# | Sname |
++----+-------+
+| S1 | Smith |
+| S2 | Jones |
+| S3 | Blake |
+| S4 | Clark |
+| S5 | Adams |
++----+-------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> select Pname,Color from P where city="London";
++-------+-------+
+| Pname | Color |
++-------+-------+
+| Nut   | Red   |
+| Screw | Red   |
+| Cog   | Red   |
++-------+-------+
+3 rows in set (0.00 sec)
+
+
+
+4. Display all the Suppliers from London .
+
+mysql> select Sname from S where City="London";
++-------+
+| Sname |
++-------+
+| Smith |
+| Clark |
++-------+
+2 rows in set (0.00 sec)
+
+5. Display all the Suppliers from Paris or Athens .
+
+mysql> select Sname from S where City="Paris" or City="Athens";
++-------+
+| Sname |
++-------+
+| Jones |
+| Blake |
+| Adams |
++-------+
+3 rows in set (0.00 sec)
+
+
+
+6. Display all the Projects in Athens .
+mysql> select Jname from J where City="Athens";
++---------+
+| Jname   |
++---------+
+| Reader  |
+| Console |
++---------+
+2 rows in set (0.00 sec)
+
+
+7. Display all the Partnames with the weight between 12 and 14 ( inclusive of both ).
+mysql> select Pname from P where Weight between 12 and 14;
++-------+
+| Pname |
++-------+
+| Nut   |
+| Screw |
+| Cam   |
++-------+
+3 rows in set (0.00 sec)
+
+
+
+8. Display all the Suppliers with a Status greater than or equal
+to 20.
+mysql> select * from S where status >=20;
++----+-------+--------+--------+
+| S# | Sname | Status | City   |
++----+-------+--------+--------+
+| S1 | Smith |     20 | London |
+| S3 | Blake |     30 | Paris  |
+| S4 | Clark |     20 | London |
+| S5 | Adams |     30 | Athens |
++----+-------+--------+--------+
+4 rows in set (0.00 sec)
+
+9. Display all the Suppliers except the Suppliers from London .
+mysql> select Sname from S where City not like "LONDON";
++-------+
+| Sname |
++-------+
+| Jones |
+| Blake |
+| Adams |
++-------+
+3 rows in set (0.00 sec)
+
+
+10. Display only the Cities from where the Suppliers come
+from .
+mysql> select city from S ;
++--------+
+| city   |
++--------+
+| London |
+| Paris  |
+| Paris  |
+| London |
+| Athens |
++--------+
+5 rows in set (0.00 sec)
+
+11. Assuming that the Part Weight is in GRAMS , display the
+same in
+MILLIGRAMS and KILOGRAMS .
+
+mysql> select weight"GRAM",weight*1000"MILIGRAM",weight/1000"KILOGRAM"from P;
++------+----------+----------+
+| GRAM | MILIGRAM | KILOGRAM |
++------+----------+----------+
+|   12 |    12000 |   0.0120 |
+|   17 |    17000 |   0.0170 |
+|   17 |    17000 |   0.0170 |
+|   14 |    14000 |   0.0140 |
+|   12 |    12000 |   0.0120 |
+|   19 |    19000 |   0.0190 |
++------+----------+----------+
+6 rows in set (0.01 sec)
+
+12. Display the Supplier table in the descending order of CITY .
+
+mysql> select Sname from S order by City desc;
++-------+
+| Sname |
++-------+
+| Jones |
+| Blake |
+| Smith |
+| Clark |
+| Adams |
++-------+
+5 rows in set (0.00 sec)
+
+13. Display the Part Table in the ascending order of CITY and
+within the city in the ascending order of Part names .
+
+mysql> (select Pname,CITY from P order by CITY,Pname asc);
++-------+--------+
+| Pname | CITY   |
++-------+--------+
+| Cog   | London |
+| Nut   | London |
+| Screw | London |
+| Bolt  | Paris  |
+| Cam   | Paris  |
+| Screw | Rome   |
++-------+--------+
+6 rows in set (0.01 sec)
+
+
+14. Display all the Suppliers with a status between 10 and 20.
+
+mysql> select Sname from S where status between 10 and 20
+    -> ;
++-------+
+| Sname |
++-------+
+| Smith |
+| Jones |
+| Clark |
++-------+
+3 rows in set (0.00 sec)
+
+15. Display all the Parts and their Weight , which are not in the
+range of 10 and
+
+
+
+1. Write a query to get Product name and quantity / unit
+
+
+mysql> select ProductName,UnitsInStock from Products limit 10;
++---------------------------------+--------------+
+| ProductName                     | UnitsInStock |
++---------------------------------+--------------+
+| Chai                            |           39 |
+| Chang                           |           17 |
+| Aniseed Syrup                   |           13 |
+| Chef Anton's Cajun Seasoning    |           53 |
+| Chef Anton's Gumbo Mix          |            0 |
+| Grandma's Boysenberry Spread    |          120 |
+| Uncle Bob's Organic Dried Pears |           15 |
+| Northwoods Cranberry Sauce      |            6 |
+| Mishi Kobe Niku                 |           29 |
+| Ikura                           |           31 |
++---------------------------------+--------------+
+10 rows in set (0.00 sec)
+
+2. Write a query to get current Product list ( Product ID and
+name )
+
+mysql> select ProductID,ProductName from Products limit 10;
++-----------+------------------------------+
+| ProductID | ProductName                  |
++-----------+------------------------------+
+|        17 | Alice Mutton                 |
+|         3 | Aniseed Syrup                |
+|        40 | Boston Crab Meat             |
+|        60 | Camembert Pierrot            |
+|        18 | Carnarvon Tigers             |
+|         1 | Chai                         |
+|         2 | Chang                        |
+|        39 | Chartreuse verte             |
+|         4 | Chef Anton's Cajun Seasoning |
+|         5 | Chef Anton's Gumbo Mix       |
++-----------+------------------------------+
+10 rows in set (0.00 sec)
+
+3. Write a query to get Product list ( id , name , unit price )
+where current products cost less than $ 20.
+
+mysql> select ProductID, ProductName,UnitPrice from Products where UnitPrice <20 limit 10;
++-----------+----------------------------+-----------+
+| ProductID | ProductName                | UnitPrice |
++-----------+----------------------------+-----------+
+|         1 | Chai                       |   18.0000 |
+|         2 | Chang                      |   19.0000 |
+|         3 | Aniseed Syrup              |   10.0000 |
+|        13 | Konbu                      |    6.0000 |
+|        15 | Genen Shouyu               |   15.5000 |
+|        16 | Pavlova                    |   17.4500 |
+|        19 | Teatime Chocolate Biscuits |    9.2000 |
+|        21 | Sir Rodney's Scones        |   10.0000 |
+|        23 | Tunnbrd                    |    9.0000 |
+|        24 | Guaran Fantstica           |    4.5000 |
++-----------+----------------------------+-----------+
+10 rows in set (0.00 sec)
+
+
+4. Write a query to get Product list ( id , name , unit price )
+where products cost between $ 15 and $ 25.
+
+mysql> select ProductID, ProductName,UnitPrice from Products where UnitPrice between 15 and 25 limit 10;
++-----------+------------------------------+-----------+
+| ProductID | ProductName                  | UnitPrice |
++-----------+------------------------------+-----------+
+|         1 | Chai                         |   18.0000 |
+|         2 | Chang                        |   19.0000 |
+|         4 | Chef Anton's Cajun Seasoning |   22.0000 |
+|         5 | Chef Anton's Gumbo Mix       |   21.3500 |
+|         6 | Grandma's Boysenberry Spread |   25.0000 |
+|        11 | Queso Cabrales               |   21.0000 |
+|        14 | Tofu                         |   23.2500 |
+|        15 | Genen Shouyu                 |   15.5000 |
+|        16 | Pavlova                      |   17.4500 |
+|        22 | Gustaf's Knckebrd            |   21.0000 |
++-----------+------------------------------+-----------+
+10 rows in set (0.00 sec)
+
+
+5. Write a query to get Product list ( name , unit price ) of above
+average price .
+
+mysql> select ProductName,UnitPrice from Products where UnitPrice>(select avg(UnitPrice) from Products) limit 10;
++---------------------------------+-----------+
+| ProductName                     | UnitPrice |
++---------------------------------+-----------+
+| Uncle Bob's Organic Dried Pears |   30.0000 |
+| Northwoods Cranberry Sauce      |   40.0000 |
+| Mishi Kobe Niku                 |   97.0000 |
+| Ikura                           |   31.0000 |
+| Queso Manchego La Pastora       |   38.0000 |
+| Alice Mutton                    |   39.0000 |
+| Carnarvon Tigers                |   62.5000 |
+| Sir Rodney's Marmalade          |   81.0000 |
+| Gumbr Gummibrchen               |   31.2300 |
+| Schoggi Schokolade              |   43.9000 |
++---------------------------------+-----------+
+10 rows in set (0.00 sec)
+
+6. Write a query to get CategoryName and Description from
+the Categories table .
+mysql> select CategoryID,Description from Categories ;
++------------+------------------------------------------------------------+
+| CategoryID | Description                                                |
++------------+------------------------------------------------------------+
+|          1 | Soft drinks, coffees, teas, beers, and ales                |
+|          2 | Sweet and savory sauces, relishes, spreads, and seasonings |
+|          3 | Desserts, candies, and sweet breads                        |
+|          4 | Cheeses                                                    |
+|          5 | Breads, crackers, pasta, and cereal                        |
+|          6 | Prepared meats                                             |
+|          7 | Dried fruit and bean curd                                  |
+|          8 | Seaweed and fish                                           |
++------------+------------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+7. Write a query to get ContactName , CompanyName ,
+ContactTitle and Phone from the Customers table .
+
+mysql> select ContactName,CompanyName,ContactTitle,Phone from Customers limit 10;
++--------------------+------------------------------------+----------------------+----------------+
+| ContactName        | CompanyName                        | ContactTitle         | Phone          |
++--------------------+------------------------------------+----------------------+----------------+
+| Maria Anders       | Alfreds Futterkiste                | Sales Representative | 030-0074321    |
+| Ana Trujillo       | Ana Trujillo Emparedados y helados | Owner                | (5) 555-4729   |
+| Antonio Moreno     | Antonio Moreno Taquera             | Owner                | (5) 555-3932   |
+| Thomas Hardy       | Around the Horn                    | Sales Representative | (171) 555-7788 |
+| Christina Berglund | Berglunds snabbkp                  | Order Administrator  | 0921-12 34 65  |
+| Hanna Moos         | Blauer See Delikatessen            | Sales Representative | 0621-08460     |
+| Frdrique Citeaux   | Blondesddsl pre et fils            | Marketing Manager    | 88.60.15.31    |
+| Martn Sommer       | Blido Comidas preparadas           | Owner                | (91) 555 22 82 |
+| Laurence Lebihan   | Bon app'                           | Owner                | 91.24.45.40    |
+| Elizabeth Lincoln  | Bottom-Dollar Markets              | Accounting Manager   | (604) 555-4729 |
++--------------------+------------------------------------+----------------------+----------------+
+10 rows in set (0.00 sec)
+
+
+8. Write a query to get EmployeeID , Title , FirstName , LastName ,
+and Region from the Employees table .
+
+
+mysql> select EmployeeID,Title,FirstName,LastName,Region from Employees limit 10;
++------------+--------------------------+-----------+-----------+--------+
+| EmployeeID | Title                    | FirstName | LastName  | Region |
++------------+--------------------------+-----------+-----------+--------+
+|          1 | Sales Representative     | Nancy     | Davolio   | WA     |
+|          2 | Vice President, Sales    | Andrew    | Fuller    | WA     |
+|          3 | Sales Representative     | Janet     | Leverling | WA     |
+|          4 | Sales Representative     | Margaret  | Peacock   | WA     |
+|          5 | Sales Manager            | Steven    | Buchanan  | NULL   |
+|          6 | Sales Representative     | Michael   | Suyama    | NULL   |
+|          7 | Sales Representative     | Robert    | King      | NULL   |
+|          8 | Inside Sales Coordinator | Laura     | Callahan  | WA     |
+|          9 | Sales Representative     | Anne      | Dodsworth | NULL   |
++------------+--------------------------+-----------+-----------+--------+
+9 rows in set (0.00 sec)
+
+
+9. Write a query to get RegionID and RegionDescription from
+the Region table .
+
+mysql> select RegionID,RegionDescription from Region;
++----------+----------------------------------------------------+
+| RegionID | RegionDescription                                  |
++----------+----------------------------------------------------+
+|        1 | Eastern                                            |
+|        2 | Westerns                                           |
+|        3 | Northern                                           |
+|        4 | Southern                                           |
++----------+----------------------------------------------------+
+4 rows in set (0.00 sec)
+
+10. Write a query to get CompanyName , Fax , Phone and
+HomePage from the Suppliers table .
+
+mysql> select CompanyName,Fax,Phone,HomePage from Suppliers limit 10;
++------------------------------------+----------------+----------------+--------------------------------------------------------------------------------------------+
+| CompanyName                        | Fax            | Phone          | HomePage                                                                                   |
++------------------------------------+----------------+----------------+--------------------------------------------------------------------------------------------+
+| Exotic Liquids                     | NULL           | (171) 555-2222 | NULL                                                                                       |
+| New Orleans Cajun Delights         | NULL           | (100) 555-4822 | #CAJUN.HTM#                                                                                |
+| Grandma Kelly's Homestead          | (313) 555-3349 | (313) 555-5735 | NULL                                                                                       |
+| Tokyo Traders                      | NULL           | (03) 3555-5011 | NULL                                                                                       |
+| Cooperativa de Quesos 'Las Cabras' | NULL           | (98) 598 76 54 | NULL                                                                                       |
+| Mayumi's                           | NULL           | (06) 431-7877  | Mayumi's (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/mayumi.htm# |
+| Pavlova, Ltd.                      | (03) 444-6588  | (03) 444-2343  | NULL                                                                                       |
+| Specialty Biscuits, Ltd.           | NULL           | (161) 555-4448 | NULL                                                                                       |
+| PB Knckebrd AB                     | 031-987 65 91  | 031-987 65 43  | NULL                                                                                       |
+| Refrescos Americanas LTDA          | NULL           | (11) 555 4640  | NULL                                                                                       |
++------------------------------------+----------------+----------------+--------------------------------------------------------------------------------------------+
+10 rows in set (0.00 sec)
+
+11. Write a query to get CategoryName and Description from
+the Categories table sorted by CategoryName .
+
+
+mysql> select CategoryName,Description from Categories order by CategoryName;
++----------------+------------------------------------------------------------+
+| CategoryName   | Description                                                |
++----------------+------------------------------------------------------------+
+| Beverages      | Soft drinks, coffees, teas, beers, and ales                |
+| Condiments     | Sweet and savory sauces, relishes, spreads, and seasonings |
+| Confections    | Desserts, candies, and sweet breads                        |
+| Dairy Products | Cheeses                                                    |
+| Grains/Cereals | Breads, crackers, pasta, and cereal                        |
+| Meat/Poultry   | Prepared meats                                             |
+| Produce        | Dried fruit and bean curd                                  |
+| Seafood        | Seaweed and fish                                           |
++----------------+------------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+
+12. Write a query to get ContactName , CompanyName ,
+ContactTitle , and Phone from the Customers table sorted by
+Phone .
+
+mysql> select ContactName,CompanyName,ContactTitle,Phone from Customers order by Phone limit 10;
++------------------+--------------------------------+----------------------+-------------------+
+| ContactName      | CompanyName                    | ContactTitle         | Phone             |
++------------------+--------------------------------+----------------------+-------------------+
+| Val2             | IT                             | IT                   | NULL              |
+| Valon Hoti       | IT                             | IT                   | NULL              |
+| Catherine Dewey  | Maison Dewey                   | Sales Agent          | (02) 201 24 67    |
+| Pascale Cartrain | Suprmes dlices                 | Accounting Manager   | (071) 23 67 22 20 |
+| Sergio Gutirrez  | Rancho grande                  | Sales Representative | (1) 123-5555      |
+| Yvonne Moncada   | Ocano Atlntico Ltda.           | Sales Agent          | (1) 135-5333      |
+| Patricio Simpson | Cactus Comidas para llevar     | Sales Agent          | (1) 135-5555      |
+| Lino Rodriguez   | Furia Bacalhau e Frutos do Mar | Sales Manager        | (1) 354-2534      |
+| Isabel de Castro | Princesa Isabel Vinhos         | Sales Representative | (1) 356-5634      |
+| Marie Bertrand   | Paris spcialits                | Owner                | (1) 42.34.22.66   |
++------------------+--------------------------------+----------------------+-------------------+
+10 rows in set (0.01 sec)
+
+
+13. Create a report showing employees' first and last names
+and hire dates sorted from newest to oldest employee.
+
++-----------+-----------+---------------------+
+| FirstName | LastName  | HireDate            |
++-----------+-----------+---------------------+
+| Janet     | Leverling | 1992-04-01 00:00:00 |
+| Nancy     | Davolio   | 1992-05-01 00:00:00 |
+| Andrew    | Fuller    | 1992-08-14 00:00:00 |
+| Margaret  | Peacock   | 1993-05-03 00:00:00 |
+| Steven    | Buchanan  | 1993-10-17 00:00:00 |
+| Michael   | Suyama    | 1993-10-17 00:00:00 |
+| Robert    | King      | 1994-01-02 00:00:00 |
+| Laura     | Callahan  | 1994-03-05 00:00:00 |
+| Anne      | Dodsworth | 1994-11-15 00:00:00 |
++-----------+-----------+---------------------+
+
+14. Create a report showing Northwind's orders sorted by
+Freight from most expensive to cheapest . Show OrderID ,
+OrderDate , ShippedDate , CustomerID , and Freight .
+
+mysql> select OrderID,OrderDate,ShippedDate,CustomerID,Freight from Orders order by Freight Desc limit 10;
++---------+---------------------+---------------------+------------+-----------+
+| OrderID | OrderDate           | ShippedDate         | CustomerID | Freight   |
++---------+---------------------+---------------------+------------+-----------+
+|   10540 | 1997-05-19 00:00:00 | 1997-06-13 00:00:00 | QUICK      | 1007.6400 |
+|   10372 | 1996-12-04 00:00:00 | 1996-12-09 00:00:00 | QUEEN      |  890.7800 |
+|   11030 | 1998-04-17 00:00:00 | 1998-04-27 00:00:00 | SAVEA      |  830.7500 |
+|   10691 | 1997-10-03 00:00:00 | 1997-10-22 00:00:00 | QUICK      |  810.0500 |
+|   10514 | 1997-04-22 00:00:00 | 1997-05-16 00:00:00 | ERNSH      |  789.9500 |
+|   11017 | 1998-04-13 00:00:00 | 1998-04-20 00:00:00 | ERNSH      |  754.2600 |
+|   10816 | 1998-01-06 00:00:00 | 1998-02-04 00:00:00 | GREAL      |  719.7800 |
+|   10479 | 1997-03-19 00:00:00 | 1997-03-21 00:00:00 | RATTC      |  708.9500 |
+|   10983 | 1998-03-27 00:00:00 | 1998-04-06 00:00:00 | SAVEA      |  657.5400 |
+|   11032 | 1998-04-17 00:00:00 | 1998-04-23 00:00:00 | WHITC      |  606.1900 |
++---------+---------------------+---------------------+------------+-----------+
+10 rows in set (0.00 sec)
+
+
+
+15. Write a query to get CompanyName , Fax , Phone ,
+HomePage and Country from the Suppliers table sorted by
+Country in descending order and then by CompanyName in
+ascending order .
+
+mysql> Select CompanyName,Fax,Phone,HomePage,Country from Suppliers order by Country desc,CompanyName asc limit 10;
++------------------------------------+----------------+----------------+-------------+-----------+
+| CompanyName                        | Fax            | Phone          | HomePage    | Country   |
++------------------------------------+----------------+----------------+-------------+-----------+
+| Bigfoot Breweries                  | NULL           | (503) 555-9931 | NULL        | USA       |
+| Grandma Kelly's Homestead          | (313) 555-3349 | (313) 555-5735 | NULL        | USA       |
+| New England Seafood Cannery        | (617) 555-3389 | (617) 555-3267 | NULL        | USA       |
+| New Orleans Cajun Delights         | NULL           | (100) 555-4822 | #CAJUN.HTM# | USA       |
+| Exotic Liquids                     | NULL           | (171) 555-2222 | NULL        | UK        |
+| Specialty Biscuits, Ltd.           | NULL           | (161) 555-4448 | NULL        | UK        |
+| PB Knckebrd AB                     | 031-987 65 91  | 031-987 65 43  | NULL        | Sweden    |
+| Svensk Sjfda AB                    | NULL           | 08-123 45 67   | NULL        | Sweden    |
+| Cooperativa de Quesos 'Las Cabras' | NULL           | (98) 598 76 54 | NULL        | Spain     |
+| Leka Trading                       | NULL           | 555-8787       | NULL        | Singapore |
++------------------------------------+----------------+----------------+-------------+-----------+
+10 rows in set (0.00 sec)
+
+
+16. Create a list of employees showing title , first name , and
+last name . Sort by Title in ascending order and then by
+LastName in descending order .
+17. Create a report showing all the company names and
+contact names of Northwind's customers in Buenos Aires .
+18. Create a report showing the product name , unit price and
+quantity per unit of all products that are out of stock .
+19. Create a report showing the order date , shipped date ,
+customer id , and freight of all orders placed on May 19, 1997.
+20. Create a report that shows the company name , contact
+name and fax number of all customers that have a fax number .
+21. Create a report that shows the first and last name of all
+employees who do not report to anybody .

@@ -1,0 +1,39 @@
+1.update job as Software Devloper whose name is SMITH
+
+mysql> update EMP set job="Software Developer" where ename="SMITH";
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+2.update sal and comm whose empno is 7788.
+
+mysql> update EMP set sal=4000,comm=100 where empno=7788;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+3.update anaul salary of all employee
+
+mysql> update EMP set sal=sal+sal*0.10 ;
+Query OK, 14 rows affected (0.11 sec)
+Rows matched: 14  Changed: 14  Warnings: 0
+
+4.update comm to 100 whose comm is null.
+
+mysql> update EMP set comm=100 where comm is NULL;
+Query OK, 9 rows affected (0.13 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+5.delete department whose deptno is 40.
+mysql> delete from DEPT where deptno=40;
+Query OK, 1 row affected (0.09 sec)
+
+6.delete all employees who is hired on '1982-01-23'
+
+mysql> delete from EMP where hire="1982-01-23";
+Query OK, 1 row affected (0.15 sec)
+
+
+7.delete all employees whose deptno is 10 .
+mysql> delete from EMP where deptno=10;
+Query OK, 2 rows affected (0.12 sec)
+
